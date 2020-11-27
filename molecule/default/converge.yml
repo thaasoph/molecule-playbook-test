@@ -1,7 +1,12 @@
 ---
 - name: Converge
   hosts: all
+
   tasks:
-    - name: "Include molecule-playbook-test"
-      include_role:
-        name: "molecule-playbook-test"
+    - name: Update apt cache (on Debian).
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+- import_playbook: ../../main.yml
