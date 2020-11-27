@@ -18,7 +18,7 @@
       set_fact:
         apache_package: httpd
         apache_service: httpd
-      when: ansible_os_familfy == 'RedHat'
+      when: ansible_os_family == 'RedHat'
 
   tasks:
     - name: Ensure Apache is installed.
@@ -34,6 +34,7 @@
           <body> Hello world!</body>
           </html>
         dest: "/var/www/html/index.html"
+        mode: '0644'
       notify: restart apache
 
     - name: Ensure Apache is running and starts at boot.
